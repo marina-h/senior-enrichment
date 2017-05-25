@@ -8,6 +8,6 @@
 const Student = require('./student');
 const Campus = require('./campus');
 
-Student.belongsTo(Campus);
+Student.belongsTo(Campus, { onDelete: 'cascade' });
 
 module.exports = { Student, Campus }

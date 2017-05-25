@@ -1,6 +1,7 @@
 'use strict'
 const Router = require('express').Router();
 const Campus = require('../db/models/campus');
+const Student = require('../db/models/student');
 
 Router.param('campusId', (req, res, next, campusId) => {
   if (!Number(campusId)) {
@@ -79,5 +80,25 @@ Router
       .catch(next);
     }
   })
+
+Router.get('/:campusId/students', (req, res, next) => {
+  if (req.invalidCampusId) {
+    res.sendStatus(500)
+  }
+  else if (!req.campus) {
+    res.sendStatus(404);
+  }
+  else {
+    Student.findAll({
+      where: {
+        campusId: req.campus.id
+      }
+    })
+    .then(students => {
+      res.json(students)
+    })
+    .catch(next);
+  }
+});
 
 module.exports = Router;
