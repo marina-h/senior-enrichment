@@ -8,6 +8,7 @@ import CampusListContainer from './components/Campus/CampusListContainer';
 import SingleCampusContainer from './components/Campus/SingleCampusContainer';
 import StudentListContainer from './components/Student/StudentListContainer';
 import SingleStudentContainer from './components/Student/SingleStudentContainer';
+import AddStudentContainer from './components/Student/AddStudentContainer';
 
 import { getCampuses, getCampus, getCampusStudents } from './redux/campuses';
 import { getStudents, getStudent } from './redux/students';
@@ -16,10 +17,11 @@ const Routes = ({ getInitialData, getCurrentCampus, getCurrentStudent }) => (
   <Router history={browserHistory}>
     <Route path="/" component={Root} onEnter={getInitialData}>
       <IndexRoute component={Home} />
-      <Route path="campus" component={CampusListContainer} />
       <Route path="campus/:campusId" component={SingleCampusContainer} onEnter={getCurrentCampus} />
-      <Route path="student" component={StudentListContainer} />
+      <Route path="campus" component={CampusListContainer} />
+      <Route path="student/add" component={AddStudentContainer} />
       <Route path="student/:studentId" component={SingleStudentContainer} onEnter={getCurrentStudent} />
+      <Route path="student" component={StudentListContainer} />
       <Route path="*" component={Home} />
     </Route>
   </Router>

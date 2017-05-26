@@ -26,7 +26,7 @@ Router
     .catch(next);
   })
   .post((req, res, next) => {
-    Student.create(req.body)
+    Student.create(req.body, { returning: true })
     .then(newStudent => {
       res.status(201).send(newStudent);
     })

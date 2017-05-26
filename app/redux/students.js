@@ -93,6 +93,15 @@ export const getStudent = (studentId) => dispatch => {
   .catch(err => console.error('Could not get student.'));
 }
 
+export const addStudent = (student) => dispatch => {
+  axios.post(`/api/student`, student)
+  .then(res => res.data)
+  .then(addedStudent => {
+    dispatch(createStudent(addedStudent));
+  })
+  .catch(err => console.error('Could not add the new student.'));
+}
+
 export const removeStudent = (studentId) => dispatch => {
   axios.delete(`/api/student/${studentId}`)
   .then(res => res.data)
